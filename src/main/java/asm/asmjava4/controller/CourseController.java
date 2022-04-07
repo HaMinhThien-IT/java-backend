@@ -4,8 +4,9 @@
  */
 package asm.asmjava4.controller;
 
-import asm.asmjava4.dao.CategoryDAO;
+import asm.asmjava4.dao.CourseDAO;
 import asm.asmjava4.model.Category;
+import asm.asmjava4.model.Course;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,33 +24,34 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @CrossOrigin(origins="*")
-public class CategoryController {
+public class CourseController {
 
     @Autowired
-    private CategoryDAO cDao;
+    private CourseDAO cDao;
 
-    @GetMapping("/categories")
-    public List<Category> getListCategory() {
+    @GetMapping("/courses")
+    public List<Course> getListCourses() {
         return cDao.getAll();
     }
 
-    @GetMapping("/category/{id}")
-    public Category getCategoryById(@PathVariable int id) {
+    @GetMapping("/course/{id}")
+    public Course getCoursesById(@PathVariable int id) {
         return cDao.getById(id);
     }
 
-    @PostMapping("category")
-    public String saveCategory(@RequestBody Category cate) {
-        return cDao.save(cate) + "Ay za Chot tit";
+    @PostMapping("course")
+    public String saveCourses(@RequestBody Course course) {
+       return cDao.save(course) + "Ay za Chot tit";
+        
     }
 
-    @PutMapping("category/{id}")
-    public String updateCategory(@RequestBody Category cate, @PathVariable int id) {
-        return cDao.update(cate, id) + "Update thanh cong";
+    @PutMapping("course/{id}")
+    public String updateCourses(@RequestBody Course course, @PathVariable int id) {
+        return cDao.update(course, id) + "Update thanh cong";
     }
 
-    @DeleteMapping("remove/{id}")
-    public String deleteCategory( @PathVariable int id) {
+    @DeleteMapping("course/{id}")
+    public String deleteCourses(@PathVariable int id) {
         return cDao.delete(id) + "delete thanh cong";
     }
 }
