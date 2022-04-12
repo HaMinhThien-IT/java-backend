@@ -5,6 +5,8 @@
 package asm.asmjava4.dao;
 
 import asm.asmjava4.model.Course;
+import asm.asmjava4.model.CourseArr;
+import asm.asmjava4.model.CourseFull;
 import java.util.List;
 
 /**
@@ -15,6 +17,6 @@ public interface CourseDAO {
    int save(Course course);
    int update(Course course,int id);
    int delete (int id);
-   List<Course> getAll(); 
+   List<CourseFull> getAll(); 
    Course getById(int id);
 }

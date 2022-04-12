@@ -36,7 +36,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public List<Category> getAll() {
-     return jdbcTemplate.query("select * from category ORDER BY id DESC", new BeanPropertyRowMapper<Category>(Category.class));
+     return jdbcTemplate.query("select * from category ORDER BY idCategory DESC", new BeanPropertyRowMapper<Category>(Category.class));
     }
 
     @Override

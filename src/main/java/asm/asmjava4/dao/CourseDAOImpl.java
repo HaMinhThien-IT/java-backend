@@ -5,6 +5,8 @@
 package asm.asmjava4.dao;
 
 import asm.asmjava4.model.Course;
+import asm.asmjava4.model.CourseArr;
+import asm.asmjava4.model.CourseFull;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -37,8 +39,8 @@ public class CourseDAOImpl implements CourseDAO {
     }
 
     @Override
-    public List<Course> getAll() {
-         return jdbcTemplate.query("select * from course ORDER BY idCourse DESC", new BeanPropertyRowMapper<Course>(Course.class));
+    public List<CourseFull> getAll() {
+         return jdbcTemplate.query("select * from course join category on course.idCategory = category.idCategory ORDER BY course.idCourse DESC", new BeanPropertyRowMapper<CourseFull>(CourseFull.class));
     }
 
     @Override

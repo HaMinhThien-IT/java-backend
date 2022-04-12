@@ -7,8 +7,15 @@ package asm.asmjava4.controller;
 import asm.asmjava4.dao.CourseDAO;
 import asm.asmjava4.model.Category;
 import asm.asmjava4.model.Course;
+import asm.asmjava4.model.CourseArr;
+import asm.asmjava4.model.CourseFull;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,26 +30,25 @@ import org.springframework.web.bind.annotation.RestController;
  * @author PC
  */
 @RestController
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class CourseController {
-
     @Autowired
     private CourseDAO cDao;
 
     @GetMapping("/courses")
-    public List<Course> getListCourses() {
+    public List<CourseFull> getListCourses() {
         return cDao.getAll();
     }
 
     @GetMapping("/course/{id}")
     public Course getCoursesById(@PathVariable int id) {
-        return cDao.getById(id);
+        return cDao.getById((Integer)id);
     }
 
     @PostMapping("course")
     public String saveCourses(@RequestBody Course course) {
-       return cDao.save(course) + "Ay za Chot tit";
-        
+        return cDao.save(course) + "Ay za Chot tit";
+
     }
 
     @PutMapping("course/{id}")

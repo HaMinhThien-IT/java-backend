@@ -4,6 +4,7 @@
  */
 package asm.asmjava4.model;
 
+import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,16 +12,15 @@ import lombok.NoArgsConstructor;
 /**
  *
  * @author PC
- */
-@Data
+ */@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Course {
-    Integer idCourse ;
-    String imageCourse;
-    String title;
-    String description;
-    String content;
-    Integer idCategory;
-    
+public class CourseArr extends Category{
+     Course[] cout;
+
+    public CourseArr(Course[] cout, Integer idCategory, String name, String image, String description) {
+        super(idCategory, name, image, description);
+        this.cout = cout;
+    }
+     
 }

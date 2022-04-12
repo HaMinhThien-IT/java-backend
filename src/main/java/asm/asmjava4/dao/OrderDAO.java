@@ -1,0 +1,17 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
+package asm.asmjava4.dao;
+
+import asm.asmjava4.model.OrderCourse;
+import asm.asmjava4.model.Orders;
+
+/**
+ *
+ * @author PC
+ */
+public interface OrderDAO {
+     int addOrder(Orders orders);
+     int addOrderCourse(OrderCourse orderCourse);
+}

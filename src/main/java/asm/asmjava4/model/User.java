@@ -15,12 +15,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Course {
-    Integer idCourse ;
-    String imageCourse;
-    String title;
-    String description;
-    String content;
-    Integer idCategory;
-    
+public class User {
+    String idUser;
+    String name ;
+    String imgUser;
+    String password;
+    String email;
+    String role;
 }

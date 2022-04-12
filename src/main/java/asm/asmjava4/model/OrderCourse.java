@@ -15,12 +15,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Course {
-    Integer idCourse ;
-    String imageCourse;
-    String title;
-    String description;
-    String content;
-    Integer idCategory;
-    
+public class OrderCourse {
+    String idOrderCourse;
+    String idOrders;
+    Integer idCourse;
+    Integer priceCourseOrder;
 }
