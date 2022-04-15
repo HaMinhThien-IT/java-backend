@@ -21,17 +21,17 @@ public class CategoryDAOImpl implements CategoryDAO {
     JdbcTemplate jdbcTemplate;
     @Override
     public int save(Category cate) {
-      return jdbcTemplate.update("INSERT INTO category(name, description, image) VALUES(?, ?, ?)",new Object[]{cate.getName(),cate.getDescription(),cate.getImage()});
+      return jdbcTemplate.update("INSERT INTO category(name, descriptionCate, image) VALUES(?, ?, ?)",new Object[]{cate.getName(),cate.getDescriptionCate(),cate.getImage()});
     }
 
     @Override
     public int update(Category cate, int id) {
-        return jdbcTemplate.update("UPDATE category set name =?, description=?, image =? where id=?",new Object[]{cate.getName(),cate.getDescription(),cate.getImage(),id});
+        return jdbcTemplate.update("UPDATE category set name =?, descriptionCate=?, image =? where idCategory=?",new Object[]{cate.getName(),cate.getDescriptionCate(),cate.getImage(),id});
     }
 
     @Override
     public int delete(int id) {
-       return jdbcTemplate.update("DELETE from category where id=?",id);
+       return jdbcTemplate.update("DELETE from category where idCategory=?",id);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public Category getById(int id) {
-      return jdbcTemplate.queryForObject("SELECT * FROM category where id=?", new BeanPropertyRowMapper<Category>(Category.class),id);
+      return jdbcTemplate.queryForObject("SELECT * FROM category where idCategory=?", new BeanPropertyRowMapper<Category>(Category.class),id);
     }
     
 }

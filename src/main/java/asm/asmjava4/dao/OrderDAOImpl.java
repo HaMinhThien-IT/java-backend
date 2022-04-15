@@ -5,10 +5,13 @@
 package asm.asmjava4.dao;
 
 import asm.asmjava4.model.OrderCourse;
+import asm.asmjava4.model.OrderJoin;
+import asm.asmjava4.model.OrderPagination;
 import asm.asmjava4.model.Orders;
 import asm.asmjava4.model.User;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,6 +37,16 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public int addOrderCourse(OrderCourse orderCourse) {
         return jdbcTemplate.update("INSERT INTO ordercourse (idOrderCourse, idOrders, idCourse, priceCourseOrder) VALUES (?,?,?,?)", new Object[]{orderCourse.getIdOrderCourse(),orderCourse.getIdOrders(),orderCourse.getIdCourse(),orderCourse.getPriceCourseOrder()});
+    }
+
+    @Override
+    public List<OrderJoin> getListOrderById(OrderPagination orderP) {
+       return jdbcTemplate.query("SELECT * FROM orders JOIN ordercourse on orders.idOrders = ordercourse.idOrders JOIN course on ordercourse.idCourse = course.idCourse WHERE orders.idUser = ?    LIMIT ? OFFSET ?", new BeanPropertyRowMapper<OrderJoin>(OrderJoin.class),orderP.getIdUser(),orderP.getPageSize(),orderP.getPage());
+    }
+
+    @Override
+    public List<OrderJoin> getTotalPage(int idUser) {
+        return jdbcTemplate.query("SELECT * FROM orders JOIN ordercourse on orders.idOrders = ordercourse.idOrders JOIN course on ordercourse.idCourse = course.idCourse WHERE orders.idUser = ?  ", new BeanPropertyRowMapper<OrderJoin>(OrderJoin.class),idUser);
     }
 
 }

@@ -33,9 +33,9 @@ public class CategoryController {
         return cDao.getAll();
     }
 
-    @GetMapping("/category/{id}")
-    public Category getCategoryById(@PathVariable int id) {
-        return cDao.getById(id);
+    @GetMapping("/category/{idCategory}")
+    public Category getCategoryById(@PathVariable int idCategory) {
+        return cDao.getById(idCategory);
     }
 
     @PostMapping("category")
@@ -43,13 +43,13 @@ public class CategoryController {
         return cDao.save(cate) + "Ay za Chot tit";
     }
 
-    @PutMapping("category/{id}")
-    public String updateCategory(@RequestBody Category cate, @PathVariable int id) {
-        return cDao.update(cate, id) + "Update thanh cong";
+    @PutMapping("category/{idCategory}")
+    public String updateCategory(@RequestBody Category cate, @PathVariable int idCategory) {
+        return cDao.update(cate, idCategory) + "Update thanh cong";
     }
 
-    @DeleteMapping("remove/{id}")
-    public String deleteCategory( @PathVariable int id) {
-        return cDao.delete(id) + "delete thanh cong";
+    @DeleteMapping("remove/{idCategory}")
+    public String deleteCategory( @PathVariable int idCategory) {
+        return cDao.delete(idCategory) + "delete thanh cong";
     }
 }

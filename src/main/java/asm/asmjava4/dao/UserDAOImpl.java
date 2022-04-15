@@ -24,22 +24,22 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public int save(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return jdbcTemplate.update("INSERT INTO user(name, imgUser, password, email, role) VALUES (?,?,?,?,?)",new Object[]{user.getName(),user.getImgUser(),user.getPassword(),user.getEmail(),"user"});
     }
 
     @Override
-    public int update(User user, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int update(User user, int idUser) {
+          return jdbcTemplate.update("UPDATE user SET name= ? ,imgUser=? ,password=? ,email=?,role= ? WHERE = ?",new Object[]{user.getName(),user.getImgUser(),user.getPassword(),user.getEmail(),"user",idUser});
     }
 
     @Override
     public int delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         return jdbcTemplate.update("DELETE from user where idUser=?",id);
     }
 
     @Override
     public List<User> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return jdbcTemplate.query("select * from user", new BeanPropertyRowMapper<User>(User.class));
     }
 
     @Override

@@ -16,7 +16,7 @@ public interface UserDAO {
 
     int save(User user);
 
-    int update(User user, int id);
+    int update(User user, int idUser);
 
     int delete(int id);
 

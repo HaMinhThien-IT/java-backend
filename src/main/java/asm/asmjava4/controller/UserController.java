@@ -4,12 +4,17 @@
  */
 package asm.asmjava4.controller;
 import asm.asmjava4.dao.UserDAO;
+import asm.asmjava4.model.Category;
 import asm.asmjava4.model.Login;
 import asm.asmjava4.model.User;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,9 +33,20 @@ public class UserController {
         return uDao.getById(logins);
     }
     
-    @GetMapping("/aaaa")
-    public String getA() {
-        return uDao.testApi();
+    @PostMapping("/user")
+    public int saveUser(@RequestBody User user) {
+        return uDao.save(user);
     }
-    
+    @PutMapping("user/{idUser}")
+    public String updateUser(@RequestBody User user, @PathVariable int idUser) {
+        return uDao.update(user, idUser) + "Update thanh cong";
+    }
+    @GetMapping("/users")
+    public List<User> getListUser() {
+        return uDao.getAll();
+    }
+    @DeleteMapping("user/{idUser}")
+    public String deleteCategory( @PathVariable int idUser) {
+        return uDao.delete(idUser) + "delete thanh cong";
+    }
 }

@@ -15,9 +15,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category {
-    Integer idCategory;
-    String name;
-    String image;
-    String descriptionCate;
+public class OrderPagination {
+    String idUser;
+    Integer page;
+    Integer pageSize;
 }

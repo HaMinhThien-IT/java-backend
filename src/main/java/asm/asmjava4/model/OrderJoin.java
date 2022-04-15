@@ -15,9 +15,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category {
+public class OrderJoin extends Orders {
+    String idOrderCourse;
+    Integer idCourse;
+    Integer priceCourseOrder;
+    String imageCourse;
+    String title;
+    String description;
+    String content;
     Integer idCategory;
-    String name;
-    String image;
-    String descriptionCate;
+    
 }
