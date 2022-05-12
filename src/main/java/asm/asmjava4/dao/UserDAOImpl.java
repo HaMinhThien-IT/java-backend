@@ -4,6 +4,8 @@
  */
 package asm.asmjava4.dao;
 
+import Helper.HashPassword;
+import Helper.SendMails;
 import asm.asmjava4.model.Login;
 import asm.asmjava4.model.User;
 import java.util.List;
@@ -45,7 +47,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User getById(Login logins) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM user where email = ? and password = ?", new BeanPropertyRowMapper<User>(User.class), logins.getEmail(), logins.getPassword());
+            return jdbcTemplate.queryForObject("SELECT * FROM user where email = ? and password = ?", new BeanPropertyRowMapper<User>(User.class), logins.getEmail(), HashPassword.encrypt(logins.getPassword()));
         } catch (Exception e) {
             return null;
         }
@@ -56,5 +58,24 @@ public class UserDAOImpl implements UserDAO {
         String a = "Aaaaaa";
         return a;
     }
+
+    @Override
+    public int register(User user) {
+        try {
+            SendMails.sendEmail(user.getEmail(), user.getEmail());
+             return jdbcTemplate.update("INSERT INTO user(name, imgUser, password, email, role) VALUES (?,?,?,?,?)",new Object[]{"null","null",HashPassword.encrypt(user.getPassword()),user.getEmail(),"user"});
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    @Override
+    public User getMe(int idUser) {
+         return jdbcTemplate.queryForObject("SELECT * FROM course where idCourse=?", new BeanPropertyRowMapper<User>(User.class),idUser);
+    }
+
+    
+
+   
 
 }

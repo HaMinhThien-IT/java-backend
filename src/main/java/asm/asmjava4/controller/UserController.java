@@ -37,6 +37,10 @@ public class UserController {
     public int saveUser(@RequestBody User user) {
         return uDao.save(user);
     }
+    @PostMapping("/register")
+    public int Register(@RequestBody User user) {
+        return uDao.register(user);
+    }
     @PutMapping("user/{idUser}")
     public String updateUser(@RequestBody User user, @PathVariable int idUser) {
         return uDao.update(user, idUser) + "Update thanh cong";
@@ -44,6 +48,10 @@ public class UserController {
     @GetMapping("/users")
     public List<User> getListUser() {
         return uDao.getAll();
+    }
+    @GetMapping("/getMe/{idUser}")
+    public User getCoursesById(@PathVariable int idUser) {
+        return uDao.getMe(idUser);
     }
     @DeleteMapping("user/{idUser}")
     public String deleteCategory( @PathVariable int idUser) {

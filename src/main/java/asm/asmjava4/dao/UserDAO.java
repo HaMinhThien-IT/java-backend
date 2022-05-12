@@ -23,5 +23,8 @@ public interface UserDAO {
     List<User> getAll();
 
     User getById(Login login);
-    String testApi ();
+
+    int register(User user);
+    String testApi();
+     User getMe(int idUser);
 }
