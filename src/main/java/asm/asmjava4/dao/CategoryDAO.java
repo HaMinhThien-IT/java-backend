@@ -16,6 +16,7 @@ public interface CategoryDAO {
    int update(Category cate,int id);
    int delete (int id);
    List<Category> getAll(); 
+   List<Category> sreachByName(String name); 
    Category getById(int id);
     
 }

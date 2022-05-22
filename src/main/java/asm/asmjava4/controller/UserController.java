@@ -4,7 +4,6 @@
  */
 package asm.asmjava4.controller;
 import asm.asmjava4.dao.UserDAO;
-import asm.asmjava4.model.Category;
 import asm.asmjava4.model.Login;
 import asm.asmjava4.model.User;
 import java.util.List;

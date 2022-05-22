@@ -32,7 +32,10 @@ public class CategoryController {
     public List<Category> getListCategory() {
         return cDao.getAll();
     }
-
+    @GetMapping("/search/{name}")
+    public List<Category> searchByName(@PathVariable String name) {
+        return cDao.sreachByName(name);
+    }
     @GetMapping("/category/{idCategory}")
     public Category getCategoryById(@PathVariable int idCategory) {
         return cDao.getById(idCategory);
