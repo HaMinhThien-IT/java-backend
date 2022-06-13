@@ -4,12 +4,14 @@
  */
 package asm.asmjava4.dao;
 
+
 import Helper.HashPassword;
 import Helper.SendMails;
 import Helper.SendMails1;
 import asm.asmjava4.model.ForgotPassword;
 import asm.asmjava4.model.Login;
 import asm.asmjava4.model.User;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -28,12 +30,12 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public int save(User user) {
-        return jdbcTemplate.update("INSERT INTO user(name, imgUser, password, email, role) VALUES (?,?,?,?,?)", new Object[]{user.getName(), user.getImgUser(), user.getPassword(), user.getEmail(), "user"});
+        return jdbcTemplate.update("INSERT INTO user(name, imgUser, password, email, role) VALUES (?,?,?,?,?)", new Object[]{user.getName(), user.getImgUser(), HashPassword.encrypt(user.getPassword()), user.getEmail(), "user"});
     }
 
     @Override
     public int update(User user, int idUser) {
-        return jdbcTemplate.update("UPDATE user SET name= ? ,imgUser=? ,password=? ,email=?,role= ? WHERE = ?", new Object[]{user.getName(), user.getImgUser(), user.getPassword(), user.getEmail(), "user", idUser});
+        return jdbcTemplate.update("UPDATE user SET name= ? ,imgUser=? ,password=? ,email=?,role= ? WHERE idUser = ?", new Object[]{user.getName(), user.getImgUser(), HashPassword.encrypt(user.getPassword()), user.getEmail(), "user", idUser});
     }
 
     @Override
@@ -43,7 +45,15 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getAll() {
-        return jdbcTemplate.query("select * from user", new BeanPropertyRowMapper<User>(User.class));
+        List<User> user = jdbcTemplate.query("select * from user", new BeanPropertyRowMapper<User>(User.class));
+
+//        for (int i = 0; i < user.size(); i++) {
+//            System.out.println(HashPassword.decrypt("gthd"));
+//
+//            user.get(i).setPassword("hihihih");
+//
+//        }
+        return user;
     }
 
     @Override
@@ -90,17 +100,17 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public int forgot(ForgotPassword forgot) {
         User checkRe = check(forgot.getEmail());
-          int min = 50;
-      int max = 99978;
-      int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
-      forgot.setCode(random_int);
+        int min = 50;
+        int max = 99978;
+        int random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
+        forgot.setCode(random_int);
         if (checkRe != null) {
             try {
-                 SendMails1.sendEmail(forgot.getEmail(), "Mã xác minh ", "Mã  : " + forgot.getCode());
+                SendMails1.sendEmail(forgot.getEmail(), "Mã xác minh ", "Mã  : " + forgot.getCode());
             } catch (Exception e) {
             }
             return jdbcTemplate.update("INSERT INTO forgotpassword(email,code) VALUES (?,?)", new Object[]{forgot.getEmail(), forgot.getCode()});
-        }else{
+        } else {
             return 401;
         }
     }
@@ -109,27 +119,29 @@ public class UserDAOImpl implements UserDAO {
     public User getMe(int idUser) {
         return jdbcTemplate.queryForObject("SELECT * FROM course where idCourse=?", new BeanPropertyRowMapper<User>(User.class), idUser);
     }
-     public ForgotPassword checkForgotx(int code) {
-      try {
+
+    public ForgotPassword checkForgotx(int code) {
+        try {
             return jdbcTemplate.queryForObject("SELECT code FROM forgotpassword where code = ?", new BeanPropertyRowMapper<ForgotPassword>(ForgotPassword.class), code);
         } catch (Exception e) {
             return null;
         }
     }
+
     @Override
     public int checkForgot(int code) {
         ForgotPassword a = checkForgotx(code);
-        if(a == null){
+        if (a == null) {
             return 405;
-        }else{
+        } else {
             return 203;
         }
     }
 
     @Override
-    public int forgotPassword(String email,String password) {
-       
-        return jdbcTemplate.update("UPDATE user set password = ? where email = ?",HashPassword.encrypt(password), email);
+    public int forgotPassword(String email, String password) {
+
+        return jdbcTemplate.update("UPDATE user set password = ? where email = ?", HashPassword.encrypt(password), email);
     }
 
 }

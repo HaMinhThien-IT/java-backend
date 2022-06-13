@@ -18,5 +18,6 @@ public interface CourseDAO {
    int update(Course course,int id);
    int delete (int id);
    List<CourseFull> getAll(); 
+   List<CourseFull> getCourse(String name); 
    Course getById(int id);
 }

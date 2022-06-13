@@ -47,4 +47,9 @@ public class CourseDAOImpl implements CourseDAO {
     public Course getById(int id) {
          return jdbcTemplate.queryForObject("SELECT * FROM course where idCourse=?", new BeanPropertyRowMapper<Course>(Course.class),id);
     }
+
+    @Override
+    public List<CourseFull> getCourse(String name) {
+         return jdbcTemplate.query("select * from course where title like '%"+name+"%'", new BeanPropertyRowMapper<CourseFull>(CourseFull.class));
+    }
 }

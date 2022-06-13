@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*")
 public class CourseController {
+
     @Autowired
     private CourseDAO cDao;
 
@@ -40,9 +41,14 @@ public class CourseController {
         return cDao.getAll();
     }
 
+    @GetMapping("/courses/{name}")
+    public List<CourseFull> getListCoursesByName(@PathVariable String name) {
+        return cDao.getCourse(name);
+    }
+
     @GetMapping("/course/{id}")
     public Course getCoursesById(@PathVariable int id) {
-        return cDao.getById((Integer)id);
+        return cDao.getById((Integer) id);
     }
 
     @PostMapping("course")
