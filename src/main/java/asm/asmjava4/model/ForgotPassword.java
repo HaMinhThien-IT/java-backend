@@ -4,7 +4,6 @@
  */
 package asm.asmjava4.model;
 
-import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,14 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
-    Integer idPost;
-    String idUser;
-    String content;
-    String image;
-    Timestamp date;
-    String isPublish;
-    String title;
-    String shortDesc;
-    Integer idCategory;
+public class ForgotPassword {
+    String email;
+    int code;
 }

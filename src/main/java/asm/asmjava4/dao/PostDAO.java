@@ -12,14 +12,15 @@ import java.util.List;
  * @author PC
  */
 public interface PostDAO {
+
     int save(Post post);
 
-//    int update(Post post, int idPost);
+    int update(Post course, int id);
 
-//    int delete(int idPost);
+    int delete(int idPost);
 
     List<Post> getAll();
-
+ List<Post> getAllById(int id);
     Post getById(int idPost);
 
 }

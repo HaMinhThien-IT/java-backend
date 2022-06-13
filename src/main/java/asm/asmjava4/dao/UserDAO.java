@@ -4,6 +4,7 @@
  */
 package asm.asmjava4.dao;
 
+import asm.asmjava4.model.ForgotPassword;
 import asm.asmjava4.model.Login;
 import asm.asmjava4.model.User;
 import java.util.List;
@@ -18,6 +19,8 @@ public interface UserDAO {
 
     int update(User user, int idUser);
 
+    int forgotPassword(String email,String password);
+
     int delete(int id);
 
     List<User> getAll();
@@ -25,6 +28,12 @@ public interface UserDAO {
     User getById(Login login);
 
     int register(User user);
+
     String testApi();
-     User getMe(int idUser);
+
+    User getMe(int idUser);
+
+    int forgot(ForgotPassword forgot);
+
+    int checkForgot(int code);
 }

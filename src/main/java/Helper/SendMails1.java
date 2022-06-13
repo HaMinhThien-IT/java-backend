@@ -10,9 +10,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
 
-public class SendMails {
+public class SendMails1 {
 
-     public static void sendEmail(String toMail,String name) throws MessagingException, UnsupportedEncodingException {
+     public static void sendEmail(String toMail,String title,String content) throws MessagingException, UnsupportedEncodingException {
 
         final String fromEmail = "thienhmpk01936@fpt.edu.vn";
         // Mat khai email cua ban
@@ -20,8 +20,8 @@ public class SendMails {
         // dia chi email nguoi nhan
         final String toEmail = toMail;
 
-        final String subject = "Đăng kí tài khoản thành công ";
-        final String body = "Chúc mừng bạn "+name + " đã đăng ký tài khoản thành công !";
+        final String subject = title;
+        final String body = content;
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host

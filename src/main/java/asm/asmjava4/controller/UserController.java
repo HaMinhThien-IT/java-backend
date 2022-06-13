@@ -4,6 +4,7 @@
  */
 package asm.asmjava4.controller;
 import asm.asmjava4.dao.UserDAO;
+import asm.asmjava4.model.ForgotPassword;
 import asm.asmjava4.model.Login;
 import asm.asmjava4.model.User;
 import java.util.List;
@@ -29,6 +30,7 @@ public class UserController {
     
     @PostMapping("/login")
     public User login(@RequestBody Login logins) {
+        System.out.println("login" + logins);
         return uDao.getById(logins);
     }
     
@@ -40,9 +42,19 @@ public class UserController {
     public int Register(@RequestBody User user) {
         return uDao.register(user);
     }
+    @PostMapping("/forgot")
+    public int ForgotPassword(@RequestBody ForgotPassword forgot) {
+    
+     return uDao.forgot(forgot);
+    }
     @PutMapping("user/{idUser}")
     public String updateUser(@RequestBody User user, @PathVariable int idUser) {
         return uDao.update(user, idUser) + "Update thanh cong";
+    }
+    @GetMapping("forgot/{email}/{password}")
+    public String forgotPassword(@PathVariable String email,@PathVariable String password) {
+        System.out.println("password" + password);
+        return uDao.forgotPassword(email,password) + "Update thanh cong";
     }
     @GetMapping("/users")
     public List<User> getListUser() {
@@ -51,6 +63,10 @@ public class UserController {
     @GetMapping("/getMe/{idUser}")
     public User getCoursesById(@PathVariable int idUser) {
         return uDao.getMe(idUser);
+    }
+    @GetMapping("/fotGot/{code}")
+    public int checkForgot(@PathVariable int code) {
+        return uDao.checkForgot(code);
     }
     @DeleteMapping("user/{idUser}")
     public String deleteCategory( @PathVariable int idUser) {
